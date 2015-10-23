@@ -132,7 +132,10 @@ class SnmpHandler(object):
             if key == 'host':
                 self.host = kwargs[key]
             if key == 'port':
-                self.port = kwargs[key]
+                try:
+                    self.port = kwargs[int(key)]
+                except ValueError:
+                    self._raise_error(ArgumentError, 'Invalid port number')
             if key == 'username':
                 self.username = kwargs[key]
             if key == 'level':
